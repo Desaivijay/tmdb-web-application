@@ -8,18 +8,18 @@ namespace tmdb_web_application.Data
 {
     public class TmdbService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientWrapper _httpClient;
         private const string BaseUrl = "https://api.themoviedb.org/3";
-        private const string ApiKey = "d98cb723a1040f1f77a3af31c07ac01e";
+        private const string ApiKey = "d98cb723a1040f1f77a3af31c07ac01e"; // Replace with your actual API key
 
-        public TmdbService(HttpClient httpClient)
+        public TmdbService(IHttpClientWrapper httpClient)
         {
             _httpClient = httpClient;
         }
 
         public async Task<IEnumerable<Movie>> GetPopularMoviesAsync()
         {
-            var response = await _httpClient.GetAsync($"{BaseUrl}/movie/popular?api_key={ApiKey}");
+            var response = await _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, $"{BaseUrl}/movie/popular?api_key={ApiKey}"));
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -41,4 +41,3 @@ namespace tmdb_web_application.Data
         public string Title { get; set; }
     }
 }
-

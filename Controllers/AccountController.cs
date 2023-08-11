@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using tmdb_web_application.Models;
-namespace tmdb_web_application.Controllers
+
+namespace YourApp.Controllers
 {
     public class AccountController : Controller
     {
